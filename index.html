@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#140806">
+    <meta name="description" content="You are invited to the Mehndi of Adeel Ahmad and Khadija Butt. November 8, 2026 · Sumbal Chak Farmhouse, Lahore.">
+    <title>MEHNDI · Adeel &amp; Khadija</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="preload" as="image" type="image/svg+xml" href="assets/main-card.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="splash-intro">
+
+    <div class="splash" id="splash" role="button" tabindex="0" aria-label="Tap to continue">
+        <div class="splash-inner">
+            <div class="splash-monogram">A<span class="mono-amp">&amp;</span>K</div>
+            <div class="splash-rule"></div>
+            <p class="splash-sub">MEHNDI</p>
+            <p class="tap-label">Tap to continue</p>
+        </div>
+    </div>
+
+    <main id="main" class="hidden">
+
+        <section class="hero">
+            <h1 class="sr-only">Mehndi of Adeel Ahmad and Khadija Butt</h1>
+            <div class="hero-stage">
+                <img
+                    class="hero-card"
+                    src="assets/main-card.svg"
+                    width="736"
+                    height="1040"
+                    alt="Invitation to the Mehndi of Khadija Imran Butt and Adeel Ahmad on Sunday, 8 November 2026 at 6:00 PM at Sumbal Chak Farmhouse, Raiwind Road, Lahore."
+                    decoding="async"
+                    fetchpriority="high">
+            </div>
+        </section>
+
+        <footer class="section-thankyou" data-reveal>
+            <div class="ty-ornament" aria-hidden="true">✦</div>
+            <h2 class="ty-heading">Thank You</h2>
+            <p>For being part of this chapter in our life.</p>
+            <p>Your love and prayers mean everything to&nbsp;us.</p>
+        </footer>
+
+    </main>
+
+    <script type="module" src="script.js"></script>
+    <script>
+        if (location.protocol === 'file:') {
+            document.addEventListener('DOMContentLoaded', function () {
+                var label = document.querySelector('.tap-label');
+                if (label) {
+                    label.style.animation = 'none';
+                    label.style.letterSpacing = '0.08em';
+                    label.textContent = 'Open via a local server';
+                }
+                var inner = document.querySelector('.splash-inner');
+                if (!inner) return;
+                var help = document.createElement('p');
+                help.className = 'tap-label';
+                help.style.animation = 'none';
+                help.style.maxWidth = '22rem';
+                help.style.lineHeight = '1.6';
+                help.style.letterSpacing = '0.02em';
+                help.style.textTransform = 'none';
+                help.style.whiteSpace = 'pre-wrap';
+                help.textContent = 'cd ~/Documents/repos/mehndi-invite\\npython3 -m http.server 8765\\nthen open http://127.0.0.1:8765/';
+                inner.appendChild(help);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="ak-shine" x1="-0.4" y1="0" x2="0.6" y2="0">
+      <stop offset="0" stop-color="#c45c26"/>
+      <stop offset="0.36" stop-color="#c45c26"/>
+      <stop offset="0.5" stop-color="#d97336"/>
+      <stop offset="0.64" stop-color="#c45c26"/>
+      <stop offset="1" stop-color="#c45c26"/>
+      <animate attributeName="x1" values="-0.8;1.2;-0.8" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="0.2;2.2;0.2" dur="6s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" fill="#140806"/>
+  <text x="16" y="22" text-anchor="middle" font-size="14" fill="url(#ak-shine)" font-family="Georgia, 'Times New Roman', serif">AK</text>
+</svg>

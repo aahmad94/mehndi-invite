@@ -1,0 +1,335 @@
+/* ============================================================
+   MEHNDI INVITE  •  Adeel & Khadija
+   ============================================================ */
+
+/* ── Tokens ─────────────────────────────────────────── */
+:root {
+    /* Champagne gold — sampled from the card bismillah */
+    --gold:       #e8c896;
+    --gold-light: #f4ddb4;
+    --gold-dim:   rgba(232, 200, 150, 0.18);
+
+    /* Henna orange — letter fill; highlight 1–2 shades lighter */
+    --ak:         #c45c26;
+    --ak-shine:   #d97336;
+    --ak-light:   #d97336;
+    --henna:      #c45c26;
+    --henna-deep: #8b3a1a;
+    --henna-dim:  rgba(196, 92, 38, 0.22);
+
+    /* Neutrals — dark umber panels */
+    --ink:        #140806;
+    --deep:       #160c0a;
+    --panel:      #1c100c;
+    --panel-deep: #140c0a;
+    --panel2:     #1a100e;
+    --text:       #e8e8e8;
+    --muted:      #c4b0a4;
+    --cream:      #f8efe2;
+    --ff-serif:   'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    --ff-sans:    'Inter', system-ui, sans-serif;
+    --ease-expo:  cubic-bezier(0.87, 0, 0.13, 1);
+    --ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset ───────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; background: var(--panel); }
+
+body {
+    font-family: var(--ff-sans);
+    background: var(--panel);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+body.splash-intro {
+    overflow: hidden;
+    height: 100dvh;
+}
+
+/* ── Utility ─────────────────────────────────────────── */
+.hidden { display: none !important; }
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ── SPLASH SCREEN ───────────────────────────────────── */
+.splash {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.9s var(--ease-soft), visibility 0.9s;
+}
+.splash.dismissed {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.splash-monogram {
+    font-family: var(--ff-serif);
+    font-size: clamp(3.5rem, 14vw, 7rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ak);
+    background-image: linear-gradient(
+        100deg,
+        var(--ak) 0%,
+        var(--ak) 36%,
+        var(--ak-shine) 50%,
+        var(--ak) 64%,
+        var(--ak) 100%
+    );
+    background-size: 240% 100%;
+    background-position: 100% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: letterShine 6s ease-in-out infinite;
+}
+.mono-amp {
+    font-style: italic;
+    font-size: 0.75em;
+    color: inherit;
+    -webkit-text-fill-color: inherit;
+    background: none;
+}
+
+.splash-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--ak);
+    opacity: 0.7;
+}
+
+.splash-sub {
+    font-family: var(--ff-serif);
+    font-size: 1rem;
+    letter-spacing: 6px;
+    color: var(--ak);
+    text-transform: uppercase;
+}
+
+.tap-label {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    animation: blink 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .splash { transition: none; }
+    .splash-monogram {
+        animation: none;
+        background: none;
+        -webkit-text-fill-color: var(--ak);
+        color: var(--ak);
+    }
+}
+
+/* ── HERO ────────────────────────────────────────────── */
+.hero {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 10px 16px 12px;
+    background-color: #2a1510;
+    background-image: url('assets/damask.jpg');
+    background-image: image-set(
+        url('assets/damask.webp') type('image/webp'),
+        url('assets/damask.jpg') type('image/jpeg')
+    );
+    background-size: 300px;
+    background-position: center;
+    filter: brightness(0.72);
+    transition: filter 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 50%, rgba(42, 21, 16, 0.18) 0%, rgba(20, 8, 6, 0.46) 100%);
+    pointer-events: none;
+}
+body.hero-revealed .hero { filter: brightness(1); }
+
+/* Contained invitation card — SVG art 736×1040, damask shows around it */
+.hero-stage {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 736 / 1040;
+    width: min(94%, calc((100dvh - 72px) * 736 / 1040));
+    height: auto;
+    max-height: calc(100dvh - 72px);
+    margin-inline: auto;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px rgba(232, 200, 150, 0.22),
+        0 28px 80px rgba(0, 0, 0, 0.55);
+}
+
+.hero-card {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Mobile portrait — card is full-bleed; 16px damask strip between sections */
+@media (max-width: 700px) and (orientation: portrait) {
+    main {
+        background-color: #2a1510;
+        background-image: url('assets/damask.jpg');
+        background-image: image-set(
+            url('assets/damask.webp') type('image/webp'),
+            url('assets/damask.jpg') type('image/jpeg')
+        );
+        background-size: 300px;
+        background-position: center;
+    }
+    .hero {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        padding: 0;
+        margin-bottom: 16px;
+        background-color: #efe4d4;
+        background-image: none;
+        overflow: hidden;
+    }
+    .hero::before { display: none; }
+    .hero-stage {
+        aspect-ratio: 736 / 1040;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        margin: 0;
+        box-shadow: none;
+        overflow: hidden;
+    }
+    .hero-card {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* ── SCROLL REVEAL ───────────────────────────────────── */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s var(--ease-soft), transform 0.9s var(--ease-soft);
+}
+[data-reveal].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── THANK YOU FOOTER ────────────────────────────────── */
+.section-thankyou {
+    position: relative;
+    isolation: isolate;
+    text-align: center;
+    padding: clamp(100px, 16vw, 160px) 24px;
+    background:
+        linear-gradient(rgba(58, 28, 14, 0.22), rgba(20, 8, 6, 0.38)),
+        url('HAK08808.JPG') center / cover no-repeat;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s var(--ease-soft), transform 0.9s var(--ease-soft);
+}
+.section-thankyou::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(196, 92, 38, 0.12);
+    mix-blend-mode: color;
+    pointer-events: none;
+}
+.section-thankyou.visible { opacity: 1; transform: translateY(0); }
+
+.ty-ornament {
+    font-size: 2rem;
+    color: #e8c4a8;
+    margin-bottom: 24px;
+}
+.ty-heading {
+    font-family: var(--ff-serif);
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    color: #e8c4a8;
+    font-weight: 400;
+    margin-bottom: 18px;
+    text-shadow: 0 2px 18px rgba(20, 8, 6, 0.4);
+}
+.section-thankyou p {
+    font-family: var(--ff-serif);
+    font-size: 1.05rem;
+    color: var(--cream);
+    font-weight: 400;
+    line-height: 1.9;
+    text-shadow: 0 1px 12px rgba(20, 8, 6, 0.4);
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────── */
+@keyframes letterShine {
+    0%, 12%  { background-position: 100% 50%; }
+    88%, 100% { background-position: 0% 50%; }
+}
+@keyframes blink {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 600px) {
+    .section-thankyou {
+        background-size: 160%;
+        background-position: center 57.5%;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+    .hero-stage {
+        width: min(94%, calc((100dvh - 56px) * 736 / 1040));
+        max-height: calc(100dvh - 56px);
+    }
+}
+
+@supports not (height: 100dvh) {
+    body.splash-intro { height: 100vh; }
+}
