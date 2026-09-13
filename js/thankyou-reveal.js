@@ -1,19 +1,19 @@
 /* ============================================================
-   thankyou-reveal.js — Slide the thank-you photo up over the damask
+   thankyou-reveal.js — Slide sections up over the damask
    Starts as soon as the splash is tapped. No scrolling.
    ============================================================ */
 
 export function initThankYouReveal() {
-    const el = document.querySelector('.section-thankyou');
-    if (!el) return;
+    const els = document.querySelectorAll('.section-countdown, .section-thankyou');
+    if (!els.length) return;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const show = () => { els.forEach((el) => el.classList.add('visible')); };
+
     if (reduced) {
-        el.classList.add('visible');
+        show();
         return;
     }
 
-    requestAnimationFrame(() => {
-        el.classList.add('visible');
-    });
+    requestAnimationFrame(show);
 }

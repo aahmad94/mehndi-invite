@@ -7,7 +7,8 @@
     <meta name="description" content="You are invited to the Mehndi of Adeel Ahmad and Khadija Butt. November 8, 2026 · Sumbal Chak Farmhouse, Lahore.">
     <title>MEHNDI · Adeel &amp; Khadija</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=19">
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cmu-serif-500-roman.woff2" crossorigin>
     <link rel="preload" as="image" type="image/svg+xml" href="assets/main-card.svg?v=2">
     <link rel="preload" as="image" href="HAK08808.JPG">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -41,6 +42,17 @@
             </div>
         </section>
 
+        <section class="section section-countdown">
+            <div class="section-tag">Countdown</div>
+            <div class="countdown-grid">
+                <div class="cd-unit"><span id="cd-days">--</span><label>Days</label></div>
+                <div class="cd-unit"><span id="cd-hours">--</span><label>Hours</label></div>
+                <div class="cd-unit"><span id="cd-min">--</span><label>Min</label></div>
+                <div class="cd-unit"><span id="cd-sec">--</span><label>Sec</label></div>
+            </div>
+            <p class="cd-sub">until the Mehndi</p>
+        </section>
+
         <footer class="section-thankyou">
             <div class="ty-ornament" aria-hidden="true">✦</div>
             <h2 class="ty-heading">Thank You</h2>
@@ -50,7 +62,7 @@
 
     </main>
 
-    <script type="module" src="script.js"></script>
+    <script type="module" src="script.js?v=2"></script>
     <script>
         if (location.protocol === 'file:') {
             document.addEventListener('DOMContentLoaded', function () {
