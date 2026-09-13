@@ -5,7 +5,8 @@
 
 import { initSplash } from './js/splash.js';
 import { initScrollReveal } from './js/scroll-reveal.js';
-import { initThankYouReveal } from './js/thankyou-reveal.js';
+import { initThankYouReveal } from './js/thankyou-reveal.js?v=2';
+import { startCountdown } from './js/countdown.js';
 
 function boot() {
     if (window.__inviteBooted) return;
@@ -15,6 +16,7 @@ function boot() {
     initSplash(() => {
         initScrollReveal();
         initThankYouReveal();
+        startCountdown();
     });
 }
 

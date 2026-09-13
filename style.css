@@ -13,6 +13,8 @@
     --ak:         #c45c26;
     --ak-shine:   #d97336;
     --ak-light:   #d97336;
+    --ak-dark:    #241008;
+    --ak-line:    #a74e20;
     --henna:      #c45c26;
     --henna-deep: #8b3a1a;
     --henna-dim:  rgba(196, 92, 38, 0.22);
@@ -26,10 +28,27 @@
     --text:       #e8e8e8;
     --muted:      #c4b0a4;
     --cream:      #f8efe2;
+    /* Sampled from the invitation card field and MEHNDI lettering */
+    --card-cream: #fee5c7;
+    --mehndi-pink:#f058b4;
+    --mehndi-pink-dim: rgba(255, 102, 196, 0.28);
+    /* Dusty teal from the card arch */
+    --card-teal:  #819d87;
+    --card-teal-dim: rgba(129, 157, 135, 0.45);
+    --on-cream:   #8a6a58;
     --ff-serif:   'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    --ff-cmu:     'CMU Serif', 'Playfair Display', Georgia, serif;
     --ff-sans:    'Inter', system-ui, sans-serif;
     --ease-expo:  cubic-bezier(0.87, 0, 0.13, 1);
     --ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@font-face {
+    font-family: 'CMU Serif';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('assets/fonts/cmu-serif-500-roman.woff2') format('woff2');
 }
 
 /* ── Reset ───────────────────────────────────────────── */
@@ -45,9 +64,22 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Viewport-fixed damask; shown on mobile so the 16px section gap is a window onto it */
+/* Viewport-fixed damask — visible on mobile under the card until sections slide in */
 .damask-bg {
-    display: none;
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: #2a1510;
+    background-image: url('assets/damask.jpg');
+    background-image: image-set(
+        url('assets/damask.webp') type('image/webp'),
+        url('assets/damask.jpg') type('image/jpeg')
+    );
+    background-size: 300px;
+    background-repeat: repeat;
+    background-position: center;
 }
 
 body.splash-intro {
@@ -169,7 +201,7 @@ body.splash-intro {
     text-align: center;
     position: relative;
     overflow: hidden;
-    padding: 10px 16px 12px;
+    padding: 10px 16px 0;
     background-color: #2a1510;
     background-image: url('assets/damask.jpg');
     background-image: image-set(
@@ -213,32 +245,19 @@ body.hero-revealed .hero { filter: brightness(1); }
     height: auto;
 }
 
-/* Mobile portrait — card is full-bleed; 16px window onto a static damask */
+main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mobile portrait — card is full-bleed */
+
 @media (max-width: 700px) and (orientation: portrait) {
     html, body {
         background-color: #2a1510;
         background-image: none;
-    }
-    .damask-bg {
-        display: block;
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        background-color: #2a1510;
-        background-image: url('assets/damask.jpg');
-        background-image: image-set(
-            url('assets/damask.webp') type('image/webp'),
-            url('assets/damask.jpg') type('image/jpeg')
-        );
-        background-size: 300px;
-        background-repeat: repeat;
-        background-position: center;
-    }
-    main {
-        position: relative;
-        z-index: 1;
-        background: none;
     }
     .hero {
         width: 100%;
@@ -246,7 +265,6 @@ body.hero-revealed .hero { filter: brightness(1); }
         min-height: 0;
         max-height: none;
         padding: 0;
-        margin-bottom: 16px;
         background: none;
         overflow: hidden;
     }
@@ -266,6 +284,14 @@ body.hero-revealed .hero { filter: brightness(1); }
     }
 }
 
+/* ── SECTION SHELL ───────────────────────────────────── */
+.section {
+    padding: clamp(80px, 12vw, 130px) clamp(24px, 6vw, 80px);
+    max-width: 880px;
+    margin-inline: auto;
+    text-align: center;
+}
+
 /* ── SCROLL REVEAL ───────────────────────────────────── */
 [data-reveal] {
     opacity: 0;
@@ -275,6 +301,74 @@ body.hero-revealed .hero { filter: brightness(1); }
 [data-reveal].visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ── SECTION TAG ─────────────────────────────────────── */
+.section-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--ak);
+    border: 1px solid var(--ak-line);
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 22px;
+}
+
+/* ── COUNTDOWN ───────────────────────────────────────── */
+.section.section-countdown {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    align-self: stretch;
+    background: var(--ak-dark);
+    padding-inline: clamp(16px, 4vw, 48px);
+    font-family: var(--ff-cmu);
+    transform: translateY(100%);
+}
+.section-countdown.visible {
+    animation: sectionSlide 2.8s cubic-bezier(0.16, 1.12, 0.3, 1) both;
+}
+
+.countdown-grid {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+    margin-bottom: 24px;
+    gap: clamp(24px, 6vw, 64px);
+}
+.cd-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+.cd-unit span {
+    font-family: var(--ff-cmu);
+    font-weight: 400;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    color: var(--mehndi-pink);
+    line-height: 1;
+    min-width: 1.8ch;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+.cd-unit label {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--card-teal);
+}
+.cd-sub {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ak);
 }
 
 /* ── THANK YOU FOOTER ────────────────────────────────── */
@@ -298,7 +392,7 @@ body.hero-revealed .hero { filter: brightness(1); }
     pointer-events: none;
 }
 .section-thankyou.visible {
-    animation: thankyouSlide 2.8s cubic-bezier(0.16, 1.12, 0.3, 1) both;
+    animation: sectionSlide 2.8s cubic-bezier(0.16, 1.12, 0.3, 1) both;
 }
 
 .ty-ornament {
@@ -332,12 +426,13 @@ body.hero-revealed .hero { filter: brightness(1); }
     0%, 100% { opacity: 0.4; }
     50% { opacity: 1; }
 }
-@keyframes thankyouSlide {
+@keyframes sectionSlide {
     0%   { transform: translateY(100%); }
     100% { transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .section-countdown,
     .section-thankyou {
         transform: none;
         animation: none;
@@ -350,6 +445,11 @@ body.hero-revealed .hero { filter: brightness(1); }
         background-size: 160%;
         background-position: center 57.5%;
     }
+}
+
+@media (max-width: 400px) {
+    .countdown-grid { gap: 14px; }
+    .cd-unit span { font-size: 2.4rem; }
 }
 
 @media (orientation: landscape) and (max-height: 520px) {
