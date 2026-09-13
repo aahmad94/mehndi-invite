@@ -35,15 +35,19 @@
 /* ── Reset ───────────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; background: var(--panel); }
+html { scroll-behavior: smooth; background: var(--panel); overflow-x: hidden; }
 
 body {
     font-family: var(--ff-sans);
     background: var(--panel);
     color: var(--text);
     line-height: 1.7;
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+}
+
+/* Viewport-fixed damask; shown on mobile so the 16px section gap is a window onto it */
+.damask-bg {
+    display: none;
 }
 
 body.splash-intro {
@@ -209,9 +213,18 @@ body.hero-revealed .hero { filter: brightness(1); }
     height: auto;
 }
 
-/* Mobile portrait — card is full-bleed; 16px damask strip between sections */
+/* Mobile portrait — card is full-bleed; 16px window onto a static damask */
 @media (max-width: 700px) and (orientation: portrait) {
-    main {
+    html, body {
+        background-color: #2a1510;
+        background-image: none;
+    }
+    .damask-bg {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
         background-color: #2a1510;
         background-image: url('assets/damask.jpg');
         background-image: image-set(
@@ -219,7 +232,13 @@ body.hero-revealed .hero { filter: brightness(1); }
             url('assets/damask.jpg') type('image/jpeg')
         );
         background-size: 300px;
+        background-repeat: repeat;
         background-position: center;
+    }
+    main {
+        position: relative;
+        z-index: 1;
+        background: none;
     }
     .hero {
         width: 100%;
@@ -228,8 +247,7 @@ body.hero-revealed .hero { filter: brightness(1); }
         max-height: none;
         padding: 0;
         margin-bottom: 16px;
-        background-color: #efe4d4;
-        background-image: none;
+        background: none;
         overflow: hidden;
     }
     .hero::before { display: none; }
