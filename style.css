@@ -287,8 +287,7 @@ body.hero-revealed .hero { filter: brightness(1); }
         linear-gradient(rgba(58, 28, 14, 0.22), rgba(20, 8, 6, 0.38)),
         url('HAK08808.JPG') center / cover no-repeat;
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.9s var(--ease-soft), transform 0.9s var(--ease-soft);
+    transform: translateY(72px);
 }
 .section-thankyou::before {
     content: '';
@@ -299,7 +298,9 @@ body.hero-revealed .hero { filter: brightness(1); }
     mix-blend-mode: color;
     pointer-events: none;
 }
-.section-thankyou.visible { opacity: 1; transform: translateY(0); }
+.section-thankyou.visible {
+    animation: thankyouSpring 1.7s cubic-bezier(0.16, 1.2, 0.3, 1) both;
+}
 
 .ty-ornament {
     font-size: 2rem;
@@ -331,6 +332,18 @@ body.hero-revealed .hero { filter: brightness(1); }
 @keyframes blink {
     0%, 100% { opacity: 0.4; }
     50% { opacity: 1; }
+}
+@keyframes thankyouSpring {
+    0%   { opacity: 0; transform: translateY(80px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section-thankyou {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────── */
