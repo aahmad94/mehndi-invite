@@ -357,6 +357,9 @@ main {
     min-width: 1.8ch;
     text-align: center;
     font-variant-numeric: tabular-nums;
+    /* CMU Roman at display size reads heavier than the card's MEHNDI.
+       A hairline of the section ground thins the stems to match. */
+    -webkit-text-stroke: 0.02em var(--ak-dark);
 }
 .cd-unit label {
     font-size: 0.7rem;
