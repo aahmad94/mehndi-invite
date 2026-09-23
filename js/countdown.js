@@ -1,9 +1,9 @@
 /* ============================================================
    countdown.js — Live countdown to the Mehndi
-   Target is 8 Nov 2026, 6:00 PM Pakistan Standard Time (UTC+5).
+   Target is 8 Nov 2026, 5:00 PM Pakistan Standard Time (UTC+5).
    ============================================================ */
 
-const TARGET = new Date('2026-11-08T18:00:00+05:00');
+const TARGET = new Date('2026-11-08T17:00:00+05:00');
 
 function pad(n) {
     return String(n).padStart(2, '0');
