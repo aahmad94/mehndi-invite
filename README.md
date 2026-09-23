@@ -2,7 +2,7 @@
 
 Digital invitation for the Mehndi of Adeel Ahmad and Khadija Butt.
 
-Sunday, 8 November 2026 · 6:00 PM · Sumbal Chak Farmhouse, Raiwind Road, Lahore.
+Sunday, 8 November 2026 · 5:00 PM · Sumbal Chak Farmhouse, Raiwind Road, Lahore.
 
 ## Local preview
 
